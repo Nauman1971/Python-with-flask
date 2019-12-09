@@ -24,8 +24,8 @@ class User(UserMixin, db.Model):
     roles = db.Column(db.String, nullable=False)
 
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 
 @app.route('/')
