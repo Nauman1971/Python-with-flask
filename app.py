@@ -4,7 +4,6 @@ from flask_bootstrap import Bootstrap
 from forms import LoginForm, SignupForm
 from flask_login import LoginManager, UserMixin, login_user, login_required, current_user, logout_user
 
-# from werkzeug.security import check_password_hash, generate_password_hash
 
 login_manager = LoginManager()
 app = Flask(__name__)
@@ -25,8 +24,8 @@ class User(UserMixin, db.Model):
     roles = db.Column(db.String, nullable=False)
 
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 
 @app.route('/')
