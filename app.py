@@ -1,8 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, request, make_response, flash
+from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from forms import LoginForm, SignupForm
-from flask_login import LoginManager, UserMixin, login_user, login_required, current_user, logout_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 
 login_manager = LoginManager()
@@ -23,10 +23,14 @@ class User(UserMixin, db.Model):
     number = db.Column(db.Integer, nullable=False)
     roles = db.Column(db.String, nullable=False)
 
-
+#
 # with app.app_context():
 #     db.create_all()
 
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 @app.route('/')
 def home():
@@ -87,6 +91,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user.password == password:
+            login_user(user)
             flash("You are logged in as {}".format(form.username.data), "success")
             return redirect(url_for('dashboard'))
         else:
@@ -118,7 +123,7 @@ def signup():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('/dashboard.html')
+    return render_template('/dashboard.html', name=current_user.username)
 
 
 @app.route('/logout')
