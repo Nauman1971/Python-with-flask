@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, SelectField
 from wtforms.validators import InputRequired, Length, Email
+from flask_wtf.file import FileField, FileRequired
 
 
 class SignupForm(FlaskForm):
@@ -9,6 +10,7 @@ class SignupForm(FlaskForm):
     # password = PasswordField("Password", validators=[InputRequired(), Length(min=8, max=200)])
     number = IntegerField("Number")
     roles = SelectField("Roles", choices=[('Teacher', 'Teacher'), ('Student', 'Student')])
+    file = FileField(validators=[FileRequired()])
 
 
 class LoginForm(FlaskForm):

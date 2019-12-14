@@ -1,9 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from forms import LoginForm, SignupForm
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-
+from flask_fontawesome import FontAwesome
+from io import BytesIO
 
 login_manager = LoginManager()
 app = Flask(__name__)
@@ -13,6 +14,7 @@ db.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 bootstrap = Bootstrap(app)
+fa = FontAwesome(app)
 
 
 class User(UserMixin, db.Model):
@@ -22,15 +24,18 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String, nullable=False)
     number = db.Column(db.Integer, nullable=False)
     roles = db.Column(db.String, nullable=False)
+    file = db.Column(db.LargeBinary)
+    file_name = db.Column(db.String(300))
 
-#
-# with app.app_context():
-#     db.create_all()
+
+with app.app_context():
+    db.create_all()
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 @app.route('/')
 def home():
@@ -108,10 +113,11 @@ def signup():
         email = form.email.data
         number = form.number.data
         roles = form.roles.data
-
+        file = form.file.data
+        file = file.read()
         existing_username = User.query.filter_by(username=username).first()
         if existing_username is None:
-            newUser = User(username=username, password=password, email=email, number=number, roles=roles)
+            newUser = User(username=username, password=password, email=email, number=number, roles=roles, file=file)
             db.session.add(newUser)
             db.session.commit()
             flash("User {} is created successfully".format(newUser.username), 'success')
@@ -123,7 +129,8 @@ def signup():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('/dashboard.html', name=current_user.username)
+    send_f = send_file(current_user.file)
+    return render_template('/dashboard.html', name=current_user.username, send_f=send_f)
 
 
 @app.route('/logout')
