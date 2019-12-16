@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from forms import LoginForm, SignupForm
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_fontawesome import FontAwesome
+# from flask_fontawesome import FontAwesome
 # from flask_script import Manager
 # from flask_migrate import Migrate, MigrateCommand
 
@@ -17,7 +17,7 @@ db.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 bootstrap = Bootstrap(app)
-fa = FontAwesome(app)
+# fa = FontAwesome(app)
 # migrate = Migrate(compare_type=True)
 # migrate = Migrate(app, db)
 #
