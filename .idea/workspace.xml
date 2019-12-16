@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="25f12cd8-a60a-40c5-8d37-fafe87b82b45" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +45,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../heroku" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -240,7 +239,10 @@
       <workItem from="1576248072715" duration="3176000" />
       <workItem from="1576258020885" duration="2025000" />
       <workItem from="1576339658389" duration="2902000" />
-      <workItem from="1576343429285" duration="2098000" />
+      <workItem from="1576343429285" duration="2400000" />
+      <workItem from="1576385792283" duration="448000" />
+      <workItem from="1576424985987" duration="3876000" />
+      <workItem from="1576465905255" duration="561000" />
     </task>
     <servers />
   </component>
